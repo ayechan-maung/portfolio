@@ -3,10 +3,19 @@ import 'package:portfolio/consts/dimension.dart';
 import 'package:portfolio/consts/txt_sty.dart';
 
 class AppDetail extends StatefulWidget {
-  var color;
+  int color;
   String path;
   String title;
-  AppDetail({this.color, this.path, this.title});
+  String about;
+  String androidUrl;
+  String iosUrl;
+  AppDetail(
+      {this.color,
+      this.path,
+      this.title,
+      this.about,
+      this.androidUrl,
+      this.iosUrl});
   @override
   _AppDetailState createState() => _AppDetailState();
 }
@@ -17,9 +26,7 @@ class _AppDetailState extends State<AppDetail> {
     return Scaffold(
       body: Container(
         child: ListView(
-          children: [
-            heading(context),
-          ],
+          children: [heading(context), aboutText(context)],
         ),
       ),
     );
@@ -33,8 +40,12 @@ class _AppDetailState extends State<AppDetail> {
       child: Row(
         children: [
           Container(
-            height: Dimension.fullHeight(context) * 0.18,
-            child: Image.asset(widget.path),
+            height: Dimension.fullHeight(context) * 0.13,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.network(
+                  widget.path,
+                )),
           ),
           Dimension.spaceWidth(12.0),
           Container(
@@ -43,6 +54,25 @@ class _AppDetailState extends State<AppDetail> {
               style: appTitle,
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget aboutText(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.white,
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+      height: Dimension.fullHeight(context) * 0.45,
+      child: Column(
+        children: [
+          Text(
+            widget.about,
+            textAlign: TextAlign.justify,
+          ),
         ],
       ),
     );

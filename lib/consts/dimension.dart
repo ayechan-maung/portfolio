@@ -12,4 +12,8 @@ class Dimension {
   static Widget spaceWidth(double width) {
     return SizedBox(width: width);
   }
+
+  static Widget spaceHeight(double width) {
+    return SizedBox(width: width);
+  }
 }

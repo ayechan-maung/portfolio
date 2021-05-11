@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/views/about.dart';
 import 'package:portfolio/views/education.dart';
-import 'package:portfolio/views/experience.dart';
+import 'package:portfolio/views/experience_file/experience.dart';
 import 'package:portfolio/views/skills.dart';
 
 class HomePage extends StatefulWidget {
