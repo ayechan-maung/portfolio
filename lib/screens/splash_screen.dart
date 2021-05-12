@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 800))
+    Future.delayed(Duration(milliseconds: 1500))
         .then((value) => Get.offAll(() => HomePage()));
 
     Firebase.initializeApp().whenComplete(() {
@@ -25,8 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Color(0xFFB0BEC5),
       body: Center(
-        child: Text('Splash Portfolio'),
-      ),
+          child: ClipRRect(
+        borderRadius: BorderRadius.circular(14.0),
+        child: Image.asset(
+          "assets/images/port.jpeg",
+          height: 150,
+          width: 150,
+        ),
+      )),
     );
   }
 }

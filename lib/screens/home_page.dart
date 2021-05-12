@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/views/about.dart';
-import 'package:portfolio/views/education.dart';
 import 'package:portfolio/views/experience_file/experience.dart';
 import 'package:portfolio/views/skill/skills.dart';
 
@@ -16,28 +15,24 @@ class _HomePageState extends State<HomePage> {
       text: 'About',
     ),
     Tab(
-      text: 'Education',
-    ),
-    Tab(
       text: 'Experience',
     ),
     Tab(
-      text: 'Skills',
+      text: 'Edu & Skills',
     ),
   ];
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         backgroundColor: Color(0xFFECEFF1),
         appBar: AppBar(
-          title: Text('Portfolio'),
+          title: Text('Acm\'s Portfolio'),
           centerTitle: true,
           bottom: TabBar(tabs: tabs),
         ),
-        body: TabBarView(
-            children: [About(), Education(), Experience(), Skills()]),
+        body: TabBarView(children: [About(), Experience(), Skills()]),
       ),
     );
   }

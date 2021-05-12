@@ -127,7 +127,12 @@ class _ExperienceState extends State<Experience> {
             height: 80,
             width: 100,
             padding: EdgeInsets.all(8.0),
-            child: Image.network(img),
+            child: FadeInImage.assetNetwork(
+              placeholder: "assets/images/flutter_favourite.png",
+              image: img,
+              imageErrorBuilder: (cxt, obj, _) =>
+                  Image.asset("assets/images/flutter_favourite.png"),
+            ),
           ),
           Container(
             child: Column(
@@ -154,7 +159,7 @@ class _ExperienceState extends State<Experience> {
               );
             }
             List<ProjectExp> projects = snapshot.data;
-            print(snapshot.data.runtimeType);
+            // print(snapshot.data.runtimeType);
             return Expanded(
                 child: SingleChildScrollView(
               child: ExpansionPanelList(
@@ -249,10 +254,20 @@ class _ExperienceState extends State<Experience> {
       child: Row(
         children: [
           Container(
-            height: 80,
+            // height: 80,
+            // width: 100,
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(14.0),
-                child: Image.network(path)),
+              borderRadius: BorderRadius.circular(14.0),
+              child: FadeInImage.assetNetwork(
+                fit: BoxFit.cover,
+                height: 90,
+                width: 90,
+                placeholder: "assets/images/flutter_favourite.png",
+                image: path,
+                imageErrorBuilder: (cxt, obj, _) =>
+                    Image.asset("assets/images/flutter_favourite.png"),
+              ),
+            ),
           ),
           Dimension.spaceWidth(12.0),
           Container(

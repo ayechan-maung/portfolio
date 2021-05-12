@@ -24,6 +24,28 @@ class _SkillsState extends State<Skills> {
     return ListView(
       padding: EdgeInsets.all(8.0),
       children: [
+        Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Education',
+                  style: expTtSty,
+                ),
+              ),
+              eduWidget(
+                  name: 'A.G.T.I(Mechanical)',
+                  school: 'Technological University (Taungoo)',
+                  year: '2009 - 2012'),
+              eduWidget(
+                  name: 'B.Sc(Maths)',
+                  school: 'Taungoo University',
+                  year: '2013 - 2017'),
+            ],
+          ),
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,7 +118,12 @@ class _SkillsState extends State<Skills> {
             height: 80,
             width: 100,
             padding: EdgeInsets.all(8.0),
-            child: Image.network(icon),
+            child: FadeInImage.assetNetwork(
+              image: icon,
+              placeholder: "assets/images/flutter_favourite.png",
+              imageErrorBuilder: (cxt, obj, _) =>
+                  Image.asset("assets/images/flutter_favourite.png"),
+            ),
           ),
           Container(
             child: Column(
@@ -122,13 +149,41 @@ class _SkillsState extends State<Skills> {
       child: Row(
         children: [
           Container(
-            height: 80,
-            width: 100,
-            padding: EdgeInsets.all(8.0),
-            child: Image.network(icon),
-          ),
+              height: 80,
+              width: 100,
+              padding: EdgeInsets.all(8.0),
+              child: FadeInImage.assetNetwork(
+                  placeholder: "assets/images/flutter_favourite.png",
+                  imageErrorBuilder: (cxt, obj, _) =>
+                      Image.asset("assets/images/flutter_favourite.png"),
+                  image: icon)),
           Container(
             child: Text(name),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget eduWidget({String name, year, school}) {
+    return Container(
+      padding: EdgeInsets.all(8.0),
+      margin: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        color: Colors.white,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: eduHead,
+          ),
+          Text(school),
+          Text(
+            year,
+            style: eduYear,
           ),
         ],
       ),
