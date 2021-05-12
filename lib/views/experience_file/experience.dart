@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:portfolio/consts/dimension.dart';
 import 'package:portfolio/consts/launch_url.dart';
 import 'package:portfolio/consts/txt_sty.dart';
@@ -52,7 +53,7 @@ class _ExperienceState extends State<Experience> {
                         stream: workExp.expStream,
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
-                            return CircularProgressIndicator();
+                            return Center(child: CircularProgressIndicator());
                           }
                           if (snapshot.hasError) {
                             return Center(
@@ -92,7 +93,7 @@ class _ExperienceState extends State<Experience> {
               // ),
 
               Container(
-                height: Dimension.fullHeight(context) * 0.55,
+                height: Dimension.fullHeight(context) * 0.8,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -145,7 +146,7 @@ class _ExperienceState extends State<Experience> {
           stream: fireNetwork.expStream,
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return CircularProgressIndicator();
+              return Center(child: CircularProgressIndicator());
             }
             if (snapshot.hasError) {
               return Center(
@@ -175,15 +176,51 @@ class _ExperienceState extends State<Experience> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              InkWell(
-                                onTap: () => LaunchUrl.launchUrl(e.androidUrl),
-                                child: Container(
-                                  padding: EdgeInsets.only(bottom: 8.0),
-                                  child: Image.asset(
-                                    'assets/images/ps.png',
-                                    height: 45,
+                              Row(
+                                children: [
+                                  InkWell(
+                                    onTap: () =>
+                                        LaunchUrl.launchUrl(e.androidUrl),
+                                    child: Container(
+                                      padding: EdgeInsets.only(bottom: 8.0),
+                                      child: Image.asset(
+                                        'assets/images/ps.png',
+                                        height: 45,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  e.iosUrl == ""
+                                      ? Container()
+                                      : InkWell(
+                                          onTap: () =>
+                                              LaunchUrl.launchUrl(e.iosUrl),
+                                          child: Container(
+                                            padding: EdgeInsets.only(
+                                                bottom: 8.0, right: 8.0),
+                                            child: Image.asset(
+                                              'assets/images/app_store.png',
+                                              height: 30,
+                                            ),
+                                          ),
+                                        ),
+                                  InkWell(
+                                    onTap: () => Fluttertoast.showToast(
+                                        msg:
+                                            'The owner not allow to see the code because of company rule',
+                                        backgroundColor:
+                                            Colors.blue.withOpacity(0.3),
+                                        gravity: ToastGravity.TOP,
+                                        textColor: Colors.white,
+                                        fontSize: 14),
+                                    child: Container(
+                                      padding: EdgeInsets.only(bottom: 8.0),
+                                      child: Image.asset(
+                                        'assets/images/github.png',
+                                        height: 30,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               Text(
                                 e.about,
