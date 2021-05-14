@@ -13,8 +13,8 @@ class PrePage extends StatelessWidget {
           primaryColor: Color(0xFFB0BEC5),
           accentColor: Color(0xFF455A64),
           textTheme: TextTheme(
-            bodyText1: TextStyle(color: Colors.blue[800]),
-            bodyText2: TextStyle(color: Colors.blue[800]),
+            bodyText1: TextStyle(color: Colors.blue[800], fontSize: 16),
+            bodyText2: TextStyle(color: Colors.blue[800], fontSize: 16),
           ),
           iconTheme: IconThemeData(color: Colors.blue[800]),
           appBarTheme: AppBarTheme(

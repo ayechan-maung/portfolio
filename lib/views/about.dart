@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/consts/dimension.dart';
@@ -44,27 +45,34 @@ class About extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  child: RichText(
-                    text: TextSpan(
-                      style: DefaultTextStyle.of(context).style,
+                    height: 40,
+                    child: Row(
                       children: [
-                        TextSpan(
-                          text: 'A',
+                        Container(
+                          width: 15,
+                          child: Text('A '),
+                          // color: Colors.blue.withOpacity(0.2),
                         ),
-                        TextSpan(
-                          text: ' self-taught ',
-                          // children:
-                          //     spanList.map((e) => TextSpan(text: e)).toList(),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
+                        Container(
+                          width: Dimension.fullWidth(context) * 0.18,
+                          child: AnimatedTextKit(
+                            isRepeatingAnimation: true,
+                            repeatForever: true,
+                            animatedTexts: [
+                              RotateAnimatedText('self-taught',
+                                  textStyle: roSty),
+                              RotateAnimatedText('passionate',
+                                  textStyle: roSty),
+                              RotateAnimatedText('committed', textStyle: roSty),
+                            ],
                           ),
                         ),
-                        TextSpan(text: 'mobile developer'),
+                        Container(
+                            width: Dimension.fullWidth(context) * 0.35,
+                            // color: Colors.blue.withOpacity(0.2),
+                            child: Text(' mobile developer.'))
                       ],
-                    ),
-                  ),
-                )
+                    ))
               ],
             )
           ],
@@ -120,7 +128,7 @@ class About extends StatelessWidget {
 
   Widget _aboutTxt(BuildContext context) {
     return Container(
-      height: Dimension.fullHeight(context) * 0.5,
+      height: Dimension.fullHeight(context) * 0.42,
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
@@ -129,36 +137,39 @@ class About extends StatelessWidget {
       child: Column(
         children: [
           RichText(
+            strutStyle: StrutStyle(height: 1.6),
             textAlign: TextAlign.justify,
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
               children: [
-                TextSpan(text: 'I\'m a '),
-                TextSpan(
-                    text: 'self-taught ',
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w500)),
+                TextSpan(text: '    I\'m a '),
+                TextSpan(text: 'self-taught ', style: abSty),
                 TextSpan(
                     text:
-                        'mobile application developer. I learned hybird cross-platform'),
+                        'mobile application developer from Myanmar. Firstly I learned JavaScript and PHP for web development. Actually, I didn\'t understand that languages how really work like ES6. Then I decided to become a mobile developer and start learned'),
                 TextSpan(
-                    text: ' Flutter ',
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.w500)),
+                    text: ' Dart Programming Language with OOP. ',
+                    style: abSty),
+                TextSpan(text: 'Then'),
+                TextSpan(text: ' Flutter ', style: abSty),
                 TextSpan(
                     text:
-                        'last 2 years ago. Now I have one year experience from Tech company based from Cambodia.')
+                        'last 2 years ago.Finally, I found my carrier what I really into it. Now I have one year experience from Tech company based from Cambodia.')
               ],
             ),
           ),
           RichText(
+            strutStyle: StrutStyle(height: 1.6),
             text: TextSpan(
               style: DefaultTextStyle.of(context).style,
               children: [
-                TextSpan(text: 'I learned '),
+                TextSpan(text: '    I learned '),
                 TextSpan(
-                    text: 'State Management, Lifecycle method',
-                    style: TextStyle(color: Colors.black)),
+                    text: 'State Management, Lifecycle method', style: abSty),
+                TextSpan(
+                    text:
+                        ' and other things should know for mobile development with '),
+                TextSpan(text: 'Flutter.', style: abSty),
               ],
             ),
           )
