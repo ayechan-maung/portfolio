@@ -12,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   int currentPage = 0;
   List<Widget> tabs = [
     Tab(
-      text: 'About',
+      text: 'About Me',
     ),
     Tab(
       text: 'Experience',

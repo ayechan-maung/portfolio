@@ -9,6 +9,7 @@ class PrePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Portfolio',
       theme: ThemeData(
+          fontFamily: 'Open Sans',
           primaryColor: Color(0xFFB0BEC5),
           accentColor: Color(0xFF455A64),
           textTheme: TextTheme(

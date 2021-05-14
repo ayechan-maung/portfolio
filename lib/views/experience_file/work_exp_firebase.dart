@@ -16,12 +16,12 @@ class WorkExpBase {
   Future<List<WorkExp>> getFirebase({String col}) async {
     final result = await fireStore.collection(col).get();
     final docs = result.docs;
-    print("Docu Length*** ${docs.length}");
+    // print("Docu Length*** ${docs.length}");
     if (docs.length > 0) {
-      print("Docu Length in get data**** ${docs.length}");
+      // print("Docu Length in get data**** ${docs.length}");
       try {
         final res = docs.map((e) {
-          print("GET DATA****:::: " + e.toString());
+          // print("GET DATA****:::: " + e.toString());
           // WorkExp expData =
           return WorkExp.fromJson(Map<String, dynamic>.from(e.data()));
           // return expData;

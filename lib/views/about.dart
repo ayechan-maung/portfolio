@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/consts/dimension.dart';
+import 'package:portfolio/consts/launch_url.dart';
 import 'package:portfolio/consts/txt_sty.dart';
 import 'package:portfolio/views/my_location.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class About extends StatelessWidget {
+  List<String> spanList = ['self-taught', 'passionate', 'committed'];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,15 +30,42 @@ class About extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              minRadius: 50,
+              minRadius: 40,
               backgroundImage: AssetImage('assets/images/tommy.jpeg'),
             ),
             Dimension.spaceWidth(12.0),
-            Container(
-              child: Text(
-                'Mr. Aye Chan Maung',
-                style: nameSty,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: Text(
+                    'Mr. Aye Chan Maung',
+                    style: nameSty,
+                  ),
+                ),
+                Container(
+                  child: RichText(
+                    text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: [
+                        TextSpan(
+                          text: 'A',
+                        ),
+                        TextSpan(
+                          text: ' self-taught ',
+                          // children:
+                          //     spanList.map((e) => TextSpan(text: e)).toList(),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextSpan(text: 'mobile developer'),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             )
           ],
         ));
@@ -72,10 +100,11 @@ class About extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
-                    onTap: () => _launchUrl('mailto: ngaayechan@gmail.com'),
+                    onTap: () =>
+                        LaunchUrl.launchUrl('mailto: ngaayechan@gmail.com'),
                     child: Text('ngaayechan@gmail.com')),
                 InkWell(
-                    onTap: () => _launchUrl('tel:+959967230114'),
+                    onTap: () => LaunchUrl.launchUrl('tel:+959967230114'),
                     child: Text('+959967230114')),
                 Text('6/11/1993'),
                 InkWell(
@@ -97,18 +126,44 @@ class About extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
-      child: Text(
-        '      I\'m a self-taught mobile application developer. I learned hybird cross-platform Flutter last 2 years ago. Now I have one year experience from Tech company based from Cambodia.',
-        textAlign: TextAlign.justify,
+      child: Column(
+        children: [
+          RichText(
+            textAlign: TextAlign.justify,
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: [
+                TextSpan(text: 'I\'m a '),
+                TextSpan(
+                    text: 'self-taught ',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w500)),
+                TextSpan(
+                    text:
+                        'mobile application developer. I learned hybird cross-platform'),
+                TextSpan(
+                    text: ' Flutter ',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w500)),
+                TextSpan(
+                    text:
+                        'last 2 years ago. Now I have one year experience from Tech company based from Cambodia.')
+              ],
+            ),
+          ),
+          RichText(
+            text: TextSpan(
+              style: DefaultTextStyle.of(context).style,
+              children: [
+                TextSpan(text: 'I learned '),
+                TextSpan(
+                    text: 'State Management, Lifecycle method',
+                    style: TextStyle(color: Colors.black)),
+              ],
+            ),
+          )
+        ],
       ),
     );
-  }
-
-  void _launchUrl(url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw "Can not launch $url";
-    }
   }
 }
