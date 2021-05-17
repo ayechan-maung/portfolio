@@ -56,109 +56,135 @@ class _ExperienceState extends State<Experience> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.symmetric(horizontal: 8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: Dimension.fullHeight(context) * 0.42,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(12.0),
-                      child: Text(
-                        'Work Experience',
-                        style: expTtSty,
-                      ),
-                    ),
-                    // Dimension.spaceHeight(12),
-                    Container(
-                      child: StreamBuilder<List<WorkExp>>(
-                        stream: workExp.expStream,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            expData = snapshot.data;
-                            return expData.length > 0
-                                ? Column(
-                                    children: expData.map((e) {
-                                      // LocalDb.getData(table)
-                                      return _workExp(
-                                          img: e.image,
-                                          title: e.title,
-                                          role: e.role,
-                                          year: e.year);
-                                    }).toList(),
-                                  )
-                                : Container(
-                                    child: Text('No Data'),
-                                  );
-                          }
-                          if (snapshot.hasError) {
-                            return Center(
-                              child: Text(snapshot.error.toString()),
-                            );
-                          }
-                          // for (var data in expData) {
-                          //   final title = data['title'];
-                          //   print('data>> ' + data.data().toString());
-                          //   print(title);
-                          // }
-                          // if(expData.length > 0) {
-                          //
-                          // }
-                          return SkeletonLoading(
-                            item: 3,
-                            radius: 30,
-                          );
-                        },
-                      ),
-                    ),
-                    // Column(
-                    //   children: expData.map((e) {
-                    //     // LocalDb.getData(table)
-                    //     return _workExp(
-                    //         img: e.image,
-                    //         title: e.title,
-                    //         role: e.role,
-                    //         year: e.year);
-                    //   }).toList(),
-                    // )
-                  ],
-                ),
+    return Scaffold(
+      backgroundColor: Color(0xFFECEFF1),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            elevation: 0.0,
+            // title: Text('Experience'),
+            expandedHeight: 150,
+            floating: false,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title:
+                  Text('Experience', style: TextStyle(color: Colors.blue[900])),
+              centerTitle: true,
+              background: Image.asset(
+                'assets/images/ff.jpeg',
+                fit: BoxFit.cover,
               ),
-              // ExpansionPanelList(
-              //   expansionCallback: (i, isOpen) {
-              //     setState(() {
-              //       _isOpen[i] = !isOpen;
-              //     });
-              //   },
-              //   children: [
-              //     expWork(_isOpen[0]),
-              //   ],
-              // ),
-
-              Container(
-                height: Dimension.fullHeight(context) * 0.8,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      // height: 20,
-                      padding: EdgeInsets.all(12.0),
-                      child: Text(
-                        'Flutter Project Experience',
-                        style: expTtSty,
-                      ),
-                    ),
-                    _expProjectList(),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
-        ));
+          SliverToBoxAdapter(
+            child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: Dimension.fullHeight(context) * 0.42,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(12.0),
+                              child: Text(
+                                'Work Experience',
+                                style: expTtSty,
+                              ),
+                            ),
+                            // Dimension.spaceHeight(12),
+                            Container(
+                              child: StreamBuilder<List<WorkExp>>(
+                                stream: workExp.expStream,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    expData = snapshot.data;
+                                    return expData.length > 0
+                                        ? Column(
+                                            children: expData.map((e) {
+                                              // LocalDb.getData(table)
+                                              return _workExp(
+                                                  img: e.image,
+                                                  title: e.title,
+                                                  role: e.role,
+                                                  year: e.year);
+                                            }).toList(),
+                                          )
+                                        : Container(
+                                            child: Text('No Data'),
+                                          );
+                                  }
+                                  if (snapshot.hasError) {
+                                    return Center(
+                                      child: Text(snapshot.error.toString()),
+                                    );
+                                  }
+                                  // for (var data in expData) {
+                                  //   final title = data['title'];
+                                  //   print('data>> ' + data.data().toString());
+                                  //   print(title);
+                                  // }
+                                  // if(expData.length > 0) {
+                                  //
+                                  // }
+                                  return SkeletonLoading(
+                                    item: 3,
+                                    radius: 30,
+                                  );
+                                },
+                              ),
+                            ),
+                            // Column(
+                            //   children: expData.map((e) {
+                            //     // LocalDb.getData(table)
+                            //     return _workExp(
+                            //         img: e.image,
+                            //         title: e.title,
+                            //         role: e.role,
+                            //         year: e.year);
+                            //   }).toList(),
+                            // )
+                          ],
+                        ),
+                      ),
+                      // ExpansionPanelList(
+                      //   expansionCallback: (i, isOpen) {
+                      //     setState(() {
+                      //       _isOpen[i] = !isOpen;
+                      //     });
+                      //   },
+                      //   children: [
+                      //     expWork(_isOpen[0]),
+                      //   ],
+                      // ),
+
+                      Container(
+                        height: Dimension.fullHeight(context) +
+                            Dimension.fullHeight(context) * 0.49,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              // height: 20,
+                              padding: EdgeInsets.all(12.0),
+                              child: Text(
+                                'Flutter Project Experience',
+                                style: expTtSty,
+                              ),
+                            ),
+                            _expProjectList(),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+          )
+        ],
+      ),
+    );
   }
 
   Widget _workExp({String img, String title, String year, String role}) {
@@ -209,8 +235,7 @@ class _ExperienceState extends State<Experience> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List<ProjectExp> projects = snapshot.data;
-              return Expanded(
-                  child: SingleChildScrollView(
+              return SingleChildScrollView(
                 child: ExpansionPanelList(
                   animationDuration: Duration(milliseconds: 800),
                   expansionCallback: (int i, bool isExpand) {
@@ -287,7 +312,7 @@ class _ExperienceState extends State<Experience> {
                       )
                       .toList(),
                 ),
-              ));
+              );
             }
             if (snapshot.hasError) {
               return Center(

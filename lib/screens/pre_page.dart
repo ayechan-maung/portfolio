@@ -18,9 +18,13 @@ class PrePage extends StatelessWidget {
           ),
           iconTheme: IconThemeData(color: Colors.blue[800]),
           appBarTheme: AppBarTheme(
-              titleTextStyle: TextStyle(color: Colors.white70),
+              iconTheme: IconThemeData(color: Colors.blue[900]),
+              backgroundColor: Color(0xFFECEFF1),
+              titleTextStyle: TextStyle(color: Colors.blue[800]),
               titleSpacing: 1.1)),
-      home: SplashScreen(),
+      home: DefaultTextStyle(
+          style: TextStyle(color: Colors.blue[800], fontSize: 16),
+          child: SplashScreen()),
     );
   }
 }

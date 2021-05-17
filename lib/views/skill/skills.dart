@@ -3,9 +3,10 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:portfolio/consts/txt_sty.dart';
 import 'package:portfolio/model/skill_model.dart';
-import 'package:portfolio/views/skill/know_lang.dart';
 import 'package:portfolio/views/skill/skill_lang.dart';
 import 'package:portfolio/views/widgets/skeleton_loading.dart';
+
+import 'know_lang.dart';
 
 class Skills extends StatefulWidget {
   @override
@@ -24,93 +25,125 @@ class _SkillsState extends State<Skills> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(8.0),
-      children: [
-        Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Education',
-                  style: expTtSty,
+    return Scaffold(
+      backgroundColor: Color(0xFFECEFF1),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            elevation: 0.0,
+            expandedHeight: 150.0,
+            floating: false,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                'assets/images/ff.jpeg',
+                fit: BoxFit.cover,
+              ),
+              title: Text('Edu & Skills',
+                  style: TextStyle(color: Colors.blue[900])),
+              centerTitle: true,
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // padding: EdgeInsets.all(8.0),
+                  children: [
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Education',
+                              style: expTtSty,
+                            ),
+                          ),
+                          eduWidget(
+                              name: 'A.G.T.I(Mechanical)',
+                              school: 'Technological University (Taungoo)',
+                              year: '2009 - 2012'),
+                          eduWidget(
+                              name: 'B.Sc(Maths)',
+                              school: 'Taungoo University',
+                              year: '2013 - 2017'),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Main Skill',
+                            style: expTtSty,
+                          ),
+                        ),
+                        StreamBuilder<List<SkillModel>>(
+                            stream: skillLanguage.skillStream,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                List<SkillModel> skillList = snapshot.data;
+                                return Column(
+                                  children: skillList
+                                      .map((e) => skillItem(
+                                          icon: e.icon,
+                                          name: e.name,
+                                          level: e.level,
+                                          skill: e.skills))
+                                      .toList(),
+                                );
+                              }
+                              return SkeletonLoading(
+                                item: 2,
+                                radius: 30,
+                              );
+                            })
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Other Programming Knowledge',
+                            style: expTtSty,
+                          ),
+                        ),
+                        StreamBuilder<List<KnowledgeLang>>(
+                            stream: skillLanguage.knowStream,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                List<KnowledgeLang> skillList = snapshot.data;
+                                return Column(
+                                  children: skillList
+                                      .map((e) => knowItem(
+                                          icon: e.icon,
+                                          name: e.name,
+                                          skill: e.skill))
+                                      .toList(),
+                                );
+                              }
+                              return SkeletonLoading(
+                                radius: 30,
+                                item: 3,
+                              );
+                            })
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              eduWidget(
-                  name: 'A.G.T.I(Mechanical)',
-                  school: 'Technological University (Taungoo)',
-                  year: '2009 - 2012'),
-              eduWidget(
-                  name: 'B.Sc(Maths)',
-                  school: 'Taungoo University',
-                  year: '2013 - 2017'),
-            ],
-          ),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Main Skill',
-                style: expTtSty,
-              ),
             ),
-            StreamBuilder<List<SkillModel>>(
-                stream: skillLanguage.skillStream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<SkillModel> skillList = snapshot.data;
-                    return Column(
-                      children: skillList
-                          .map((e) => skillItem(
-                              icon: e.icon,
-                              name: e.name,
-                              level: e.level,
-                              skill: e.skills))
-                          .toList(),
-                    );
-                  }
-                  return SkeletonLoading(
-                    item: 2,
-                    radius: 30,
-                  );
-                })
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                'Other Programming Knowledge',
-                style: expTtSty,
-              ),
-            ),
-            StreamBuilder<List<KnowledgeLang>>(
-                stream: skillLanguage.knowStream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<KnowledgeLang> skillList = snapshot.data;
-                    return Column(
-                      children: skillList
-                          .map((e) => knowItem(
-                              icon: e.icon, name: e.name, skill: e.skill))
-                          .toList(),
-                    );
-                  }
-                  return SkeletonLoading(
-                    radius: 30,
-                    item: 3,
-                  );
-                })
-          ],
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 

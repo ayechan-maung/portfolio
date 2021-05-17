@@ -10,11 +10,22 @@ class About extends StatelessWidget {
   List<String> spanList = ['self-taught', 'passionate', 'committed'];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(8.0),
-      child: ListView(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_profile(context), _personal(context), _aboutTxt(context)],
+    return Scaffold(
+      backgroundColor: Color(0xFFECEFF1),
+      appBar: AppBar(
+        elevation: 0.0,
+        title: Text(
+          'About',
+          style: TextStyle(color: Colors.blue[900]),
+        ),
+        centerTitle: true,
+      ),
+      body: Container(
+        margin: EdgeInsets.all(8.0),
+        child: ListView(
+          // crossAxisAlignment: CrossAxisAlignment.start,
+          children: [_profile(context), _personal(context), _aboutTxt(context)],
+        ),
       ),
     );
   }
@@ -32,7 +43,7 @@ class About extends StatelessWidget {
           children: [
             CircleAvatar(
               minRadius: 40,
-              backgroundImage: AssetImage('assets/images/tommy.jpeg'),
+              backgroundImage: AssetImage('assets/images/flutter_favorite.png'),
             ),
             Dimension.spaceWidth(12.0),
             Column(
@@ -128,19 +139,20 @@ class About extends StatelessWidget {
 
   Widget _aboutTxt(BuildContext context) {
     return Container(
-      height: Dimension.fullHeight(context) * 0.42,
+      // height: Dimension.fullHeight(context) * 0.42,
       padding: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         color: Colors.white,
       ),
-      child: Column(
+      child: Flex(
+        direction: Axis.vertical,
         children: [
           RichText(
             strutStyle: StrutStyle(height: 1.6),
             textAlign: TextAlign.justify,
             text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
+              style: Theme.of(context).textTheme.bodyText1,
               children: [
                 TextSpan(text: '    I\'m a '),
                 TextSpan(text: 'self-taught ', style: abSty),
@@ -148,7 +160,7 @@ class About extends StatelessWidget {
                     text:
                         'mobile application developer from Myanmar. Firstly I learned JavaScript and PHP for web development. Actually, I didn\'t understand that languages how really work like ES6. Then I decided to become a mobile developer and start learned'),
                 TextSpan(
-                    text: ' Dart Programming Language with OOP. ',
+                    text: ' Dart Programming Language include OOP. ',
                     style: abSty),
                 TextSpan(text: 'Then'),
                 TextSpan(text: ' Flutter ', style: abSty),
@@ -161,7 +173,7 @@ class About extends StatelessWidget {
           RichText(
             strutStyle: StrutStyle(height: 1.6),
             text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
+              style: Theme.of(context).textTheme.bodyText1,
               children: [
                 TextSpan(text: '    I learned '),
                 TextSpan(
