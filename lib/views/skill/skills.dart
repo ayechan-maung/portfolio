@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:portfolio/consts/txt_sty.dart';
@@ -89,14 +90,31 @@ class _SkillsState extends State<Skills> {
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 List<SkillModel> skillList = snapshot.data;
-                                return Column(
-                                  children: skillList
-                                      .map((e) => skillItem(
-                                          icon: e.icon,
-                                          name: e.name,
-                                          level: e.level,
-                                          skill: e.skills))
-                                      .toList(),
+                                final skills =
+                                    Iterable.generate(skillList.length)
+                                        .toList();
+                                return AnimationLimiter(
+                                  child: Column(
+                                    children: skills
+                                        .map(
+                                          (e) => AnimationConfiguration
+                                              .staggeredList(
+                                            position: e,
+                                            child: ScaleAnimation(
+                                              duration:
+                                                  Duration(milliseconds: 900),
+                                              child: FadeInAnimation(
+                                                child: skillItem(
+                                                    icon: skillList[e].icon,
+                                                    name: skillList[e].name,
+                                                    level: skillList[e].level,
+                                                    skill: skillList[e].skills),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
                                 );
                               }
                               return SkeletonLoading(
@@ -121,13 +139,29 @@ class _SkillsState extends State<Skills> {
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 List<KnowledgeLang> skillList = snapshot.data;
-                                return Column(
-                                  children: skillList
-                                      .map((e) => knowItem(
-                                          icon: e.icon,
-                                          name: e.name,
-                                          skill: e.skill))
-                                      .toList(),
+                                final skills =
+                                    Iterable.generate(skillList.length)
+                                        .toList();
+                                return AnimationLimiter(
+                                  child: Column(
+                                    children: skills
+                                        .map((e) => AnimationConfiguration
+                                                .staggeredList(
+                                              position: e,
+                                              child: ScaleAnimation(
+                                                duration:
+                                                    Duration(milliseconds: 900),
+                                                child: FadeInAnimation(
+                                                  child: knowItem(
+                                                      icon: skillList[e].icon,
+                                                      name: skillList[e].name,
+                                                      skill:
+                                                          skillList[e].skill),
+                                                ),
+                                              ),
+                                            ))
+                                        .toList(),
+                                  ),
                                 );
                               }
                               return SkeletonLoading(

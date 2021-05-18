@@ -1,3 +1,4 @@
+import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -14,17 +15,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPage = 0;
-  List<Widget> tabs = [
-    Tab(
-      text: 'About Me',
-    ),
-    Tab(
-      text: 'Experience',
-    ),
-    Tab(
-      text: 'Edu & Skills',
-    ),
-  ];
   final _curve = Curves.easeInOut;
   bool isOpen = false;
 
@@ -47,32 +37,71 @@ class _HomePageState extends State<HomePage> {
       //   elevation: 0.0,
       //   // bottom: TabBar(tabs: tabs),
       // ),
-      body: ListView(
-        padding: EdgeInsets.all(8.0),
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 40.0),
-            child: Text(
-              'Acm\'s Portfolio',
-              style: nameSty,
-              textAlign: TextAlign.center,
+      body: AnimateIfVisibleWrapper(
+        showItemInterval: Duration(milliseconds: 150),
+        child: ListView(
+          padding: EdgeInsets.all(8.0),
+          children: [
+            AnimateIfVisible(
+              key: Key('item.0'),
+              duration: Duration(milliseconds: 900),
+              builder: (BuildContext context, Animation<double> animation) =>
+                  FadeTransition(
+                opacity: Tween<double>(begin: 0, end: 1).animate(animation),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 40.0),
+                  child: Text(
+                    'Acm\'s Portfolio',
+                    style: nameSty,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
             ),
-          ),
-          item(context, icon: FontAwesomeIcons.user, title: 'About',
-              onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => About()));
-          }),
-          item(context, icon: FontAwesomeIcons.briefcase, title: 'Experience',
-              onPressed: () {
-            Get.to(() => Experience());
-          }),
-          item(context,
-              icon: FontAwesomeIcons.laptopCode,
-              title: 'Edu & Skills', onPressed: () {
-            Get.to(() => Skills());
-          }),
-        ],
+            AnimateIfVisible(
+              key: Key('item.1'),
+              duration: Duration(milliseconds: 900),
+              // delay: Duration(milliseconds: 200),
+              builder: (BuildContext context, Animation<double> animation) =>
+                  FadeTransition(
+                opacity: Tween<double>(begin: 0, end: 1).animate(animation),
+                child: item(context,
+                    icon: FontAwesomeIcons.user, title: 'About', onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => About()));
+                }),
+              ),
+            ),
+            AnimateIfVisible(
+              key: Key('item.2'),
+              duration: Duration(milliseconds: 900),
+              // delay: Duration(milliseconds: 200),
+              builder: (BuildContext context, Animation<double> animation) =>
+                  FadeTransition(
+                opacity: Tween<double>(begin: 0, end: 1).animate(animation),
+                child: item(context,
+                    icon: FontAwesomeIcons.briefcase,
+                    title: 'Experience', onPressed: () {
+                  Get.to(() => Experience());
+                }),
+              ),
+            ),
+            AnimateIfVisible(
+              key: Key('item.3'),
+              duration: Duration(milliseconds: 900),
+              // delay: Duration(milliseconds: 200),
+              builder: (BuildContext context, Animation<double> animation) =>
+                  FadeTransition(
+                opacity: Tween<double>(begin: 0, end: 1).animate(animation),
+                child: item(context,
+                    icon: FontAwesomeIcons.laptopCode,
+                    title: 'Edu & Skills', onPressed: () {
+                  Get.to(() => Skills());
+                }),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

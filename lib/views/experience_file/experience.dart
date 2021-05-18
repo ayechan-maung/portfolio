@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:portfolio/consts/dimension.dart';
 import 'package:portfolio/consts/launch_url.dart';
@@ -83,11 +84,12 @@ class _ExperienceState extends State<Experience> {
                   child: Column(
                     children: [
                       Container(
-                        height: Dimension.fullHeight(context) * 0.42,
+                        // height: Dimension.fullHeight(context) * 0.44,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
+                              // height: Dimension.fullHeight(context) * 0.1,
                               padding: EdgeInsets.all(12.0),
                               child: Text(
                                 'Work Experience',
@@ -96,22 +98,64 @@ class _ExperienceState extends State<Experience> {
                             ),
                             // Dimension.spaceHeight(12),
                             Container(
+                              // height: Dimension.fullHeight(context) * 0.37,
                               child: StreamBuilder<List<WorkExp>>(
                                 stream: workExp.expStream,
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     expData = snapshot.data;
-                                    return expData.length > 0
-                                        ? Column(
-                                            children: expData.map((e) {
-                                              // LocalDb.getData(table)
-                                              return _workExp(
-                                                  img: e.image,
-                                                  title: e.title,
-                                                  role: e.role,
-                                                  year: e.year);
-                                            }).toList(),
+                                    final List expList =
+                                        Iterable.generate(expData.length)
+                                            .toList();
+                                    return expList.length > 0
+                                        ? AnimationLimiter(
+                                            child: Column(
+                                              children: expList.map((e) {
+                                                // LocalDb.getData(table)
+                                                return AnimationConfiguration
+                                                    .staggeredList(
+                                                  duration: Duration(
+                                                      milliseconds: 900),
+                                                  position: e,
+                                                  child: SlideAnimation(
+                                                    horizontalOffset: 40.0,
+                                                    delay: Duration(
+                                                        milliseconds: 300),
+                                                    child: _workExp(
+                                                        img: expData[e].image,
+                                                        title: expData[e].title,
+                                                        role: expData[e].role,
+                                                        year: expData[e].year),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                            ),
                                           )
+                                        // AnimationLimiter(
+                                        //     child: ListView.builder(
+                                        //       itemCount: expData.length,
+                                        //       itemBuilder:
+                                        //           (BuildContext context,
+                                        //                   int i) =>
+                                        //               AnimationConfiguration
+                                        //                   .staggeredList(
+                                        //         position: i,
+                                        //         child: SlideAnimation(
+                                        //           // verticalOffset: 50.0,
+                                        //           horizontalOffset: 40.0,
+                                        //           duration: Duration(
+                                        //               milliseconds: 1900),
+                                        //           child: FadeInAnimation(
+                                        //             child: _workExp(
+                                        //                 img: expData[i].image,
+                                        //                 title: expData[i].title,
+                                        //                 year: expData[i].year,
+                                        //                 role: expData[i].role),
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   )
                                         : Container(
                                             child: Text('No Data'),
                                           );
@@ -121,14 +165,6 @@ class _ExperienceState extends State<Experience> {
                                       child: Text(snapshot.error.toString()),
                                     );
                                   }
-                                  // for (var data in expData) {
-                                  //   final title = data['title'];
-                                  //   print('data>> ' + data.data().toString());
-                                  //   print(title);
-                                  // }
-                                  // if(expData.length > 0) {
-                                  //
-                                  // }
                                   return SkeletonLoading(
                                     item: 3,
                                     radius: 30,
@@ -228,106 +264,6 @@ class _ExperienceState extends State<Experience> {
     );
   }
 
-  Widget _expProjectList() {
-    return Container(
-      child: StreamBuilder<List<ProjectExp>>(
-          stream: fireNetwork.expStream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List<ProjectExp> projects = snapshot.data;
-              return SingleChildScrollView(
-                child: ExpansionPanelList(
-                  animationDuration: Duration(milliseconds: 800),
-                  expansionCallback: (int i, bool isExpand) {
-                    setState(() {
-                      projects[i].isExpand = !projects[i].isExpand;
-                    });
-                  },
-                  children: projects
-                      .map(
-                        (e) => ExpansionPanel(
-                          headerBuilder: (BuildContext context, bool isExpand) {
-                            return _expProject(e.logo, e.desc, e.title);
-                          },
-                          isExpanded: e.isExpand,
-                          body: Container(
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () =>
-                                          LaunchUrl.launchUrl(e.androidUrl),
-                                      child: Container(
-                                        padding: EdgeInsets.only(bottom: 8.0),
-                                        child: Image.asset(
-                                          'assets/images/ps.png',
-                                          height: 45,
-                                        ),
-                                      ),
-                                    ),
-                                    e.iosUrl == ""
-                                        ? Container()
-                                        : InkWell(
-                                            onTap: () =>
-                                                LaunchUrl.launchUrl(e.iosUrl),
-                                            child: Container(
-                                              padding: EdgeInsets.only(
-                                                  bottom: 8.0, right: 8.0),
-                                              child: Image.asset(
-                                                'assets/images/app_store.png',
-                                                height: 30,
-                                              ),
-                                            ),
-                                          ),
-                                    InkWell(
-                                      onTap: () => Fluttertoast.showToast(
-                                          msg:
-                                              'The owner not allow to see the code because of company rule',
-                                          backgroundColor:
-                                              Colors.blue.withOpacity(0.3),
-                                          gravity: ToastGravity.TOP,
-                                          textColor: Colors.white,
-                                          fontSize: 14),
-                                      child: Container(
-                                        padding: EdgeInsets.only(bottom: 8.0),
-                                        child: Image.asset(
-                                          'assets/images/github.png',
-                                          height: 30,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Text(
-                                  e.about,
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              );
-            }
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error.toString()),
-              );
-            }
-            // print(snapshot.data.runtimeType);
-            return SkeletonLoading(
-              radius: 45,
-              item: 4,
-            );
-          }),
-    );
-  }
-
   Widget _expProject(String path, String desc, String appName) {
     return Container(
       decoration: BoxDecoration(
@@ -374,6 +310,114 @@ class _ExperienceState extends State<Experience> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _expProjectList() {
+    return Container(
+      child: StreamBuilder<List<ProjectExp>>(
+          stream: fireNetwork.expStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<ProjectExp> projects = snapshot.data;
+              final List proList = Iterable.generate(projects.length).toList();
+              return Expanded(
+                child: SingleChildScrollView(
+                  child: ExpansionPanelList(
+                    elevation: 4,
+                    animationDuration: Duration(milliseconds: 800),
+                    expansionCallback: (int i, bool isExpand) {
+                      setState(() {
+                        projects[i].isExpand = !projects[i].isExpand;
+                      });
+                    },
+                    children: projects
+                        .map(
+                          (e) => ExpansionPanel(
+                            canTapOnHeader: true,
+                            headerBuilder:
+                                (BuildContext context, bool isExpand) {
+                              return _expProject(e.logo, e.desc, e.title);
+                            },
+                            isExpanded: e.isExpand,
+                            body: Container(
+                              padding: EdgeInsets.only(
+                                  right: 8.0, left: 8.0, bottom: 8.0),
+                              // margin: EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () =>
+                                            LaunchUrl.launchUrl(e.androidUrl),
+                                        child: Container(
+                                          padding: EdgeInsets.only(bottom: 8.0),
+                                          child: Image.asset(
+                                            'assets/images/ps.png',
+                                            height: 45,
+                                          ),
+                                        ),
+                                      ),
+                                      e.iosUrl == ""
+                                          ? Container()
+                                          : InkWell(
+                                              onTap: () =>
+                                                  LaunchUrl.launchUrl(e.iosUrl),
+                                              child: Container(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 8.0, right: 8.0),
+                                                child: Image.asset(
+                                                  'assets/images/app_store.png',
+                                                  height: 30,
+                                                ),
+                                              ),
+                                            ),
+                                      InkWell(
+                                        onTap: () => Fluttertoast.showToast(
+                                            msg:
+                                                'The owner not allow to see the code because of company rule',
+                                            backgroundColor:
+                                                Colors.blue.withOpacity(0.3),
+                                            gravity: ToastGravity.TOP,
+                                            textColor: Colors.white,
+                                            fontSize: 14),
+                                        child: Container(
+                                          padding: EdgeInsets.only(bottom: 8.0),
+                                          child: Image.asset(
+                                            'assets/images/github.png',
+                                            height: 30,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    e.about,
+                                    textAlign: TextAlign.justify,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            }
+            // print(snapshot.data.runtimeType);
+            return SkeletonLoading(
+              radius: 45,
+              item: 4,
+            );
+          }),
     );
   }
 }
