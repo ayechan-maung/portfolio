@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/consts/app_consts.dart';
+import 'package:portfolio/consts/notification.dart';
 import 'package:portfolio/screens/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,6 +14,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    // OneSignalSet().initNotification(context);
+    // OneSignalUtils().initOneSignal(context);
     Future.delayed(Duration(milliseconds: 1500))
         .then((value) => Get.offAll(() => HomePage()));
 
