@@ -8,7 +8,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.1.0+4
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -37,6 +37,7 @@ dependencies:
   auto_animated: ^3.0.0
   flutter_staggered_animations: ^1.0.0
   onesignal_flutter: ^3.2.3
+  flutter_branch_sdk: ^3.4.0
 
 dev_dependencies:
   flutter_test:

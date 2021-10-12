@@ -2,10 +2,11 @@
     package="com.ayechanmaung.portfolio">
    <application
         android:label="Acm"
+        android:name="io.branch.referral.BranchApp"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
@@ -31,7 +32,31 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+                        <!-- Branch URI scheme -->
+            <intent-filter>
+                <data android:scheme="httpacmportfolio.app.link/yqVeWpcNhkb" android:host="open" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <!-- Branch App Links -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="acmportfolio.app.link" />
+                <data android:scheme="https" android:host="acmportfolio-alternate.app.link" />
+            </intent-filter>
         </activity>
+
+                <!-- Branch init -->
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_kf2uIk5aTIclxtJMHMs73obmsydv4gbG" />
+        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="secret_live_bXh6CMVFFCxlXEfC6Bkyj2c4DpK5fco5" />
+
+        <!-- Branch testing (TestMode "true" to simulate fresh installs on dev environment) -->
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
