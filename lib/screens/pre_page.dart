@@ -23,12 +23,12 @@ class _PrePageState extends State<PrePage> {
       GlobalKey<ScaffoldMessengerState>();
 
   BranchContentMetaData metadata = BranchContentMetaData();
-  BranchUniversalObject buo;
+  late BranchUniversalObject buo;
   BranchLinkProperties lp = BranchLinkProperties();
-  BranchEvent eventStandart;
-  BranchEvent eventCustom;
+  BranchEvent? eventStandart;
+  late BranchEvent eventCustom;
 
-  StreamSubscription<Map> streamSubscription;
+  StreamSubscription<Map>? streamSubscription;
   StreamController<String> controllerData = StreamController<String>();
   StreamController<String> controllerInitSession = StreamController<String>();
   StreamController<String> controllerUrl = StreamController<String>();
@@ -46,7 +46,7 @@ class _PrePageState extends State<PrePage> {
   }
 
   initNotification() async {
-    var status = await OneSignal.shared.getDeviceState();
+    var status = await (OneSignal.shared.getDeviceState() as FutureOr<OSDeviceState>);
     // var userId = status.userId;
     // if(userId != null){
     print('user id==> ' + status.userId.toString());

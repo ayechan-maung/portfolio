@@ -5,9 +5,9 @@ class OneSignalSet{
   final oneSignalId = '4414fa14-ebb5-449e-ae6c-a97ca1081bf0';
   bool _requireConsent = true;
   String _debugLabelString = "";
-  String _emailAddress;
-  String _smsNumber;
-  String _externalUserId;
+  String? _emailAddress;
+  String? _smsNumber;
+  String? _externalUserId;
   bool _enableConsentButton = false;
 
   Future<void> initPlatformState() async {
@@ -230,7 +230,7 @@ class OneSignalSet{
     if (deviceState == null || deviceState.userId == null)
       return;
 
-    var playerId = deviceState.userId;
+    var playerId = deviceState.userId!;
 
     var imgUrlString =
         "http://cdn1-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-2.jpg";
@@ -257,7 +257,7 @@ class OneSignalSet{
     if (deviceState == null || deviceState.userId == null)
       return;
 
-    var playerId = deviceState.userId;
+    var playerId = deviceState.userId!;
 
     var notification = OSCreateNotification.silentNotification(
         playerIds: [playerId], additionalData: {'test': 'value'});
@@ -286,7 +286,7 @@ class OneSignalSet{
     OneSignal.shared.removeTriggerForKey("trigger_2");
 
     // Get the value for a trigger by its key
-    Object triggerValue = await OneSignal.shared.getTriggerValueForKey("trigger_3");
+    Object? triggerValue = await OneSignal.shared.getTriggerValueForKey("trigger_3");
     print("'trigger_3' key trigger value: ${triggerValue?.toString()}");
 
     // Create a list and bulk remove triggers based on keys supplied

@@ -3,12 +3,12 @@ import 'package:portfolio/consts/dimension.dart';
 import 'package:portfolio/consts/txt_sty.dart';
 
 class AppDetail extends StatefulWidget {
-  int color;
-  String path;
-  String title;
-  String about;
-  String androidUrl;
-  String iosUrl;
+  int? color;
+  String? path;
+  String? title;
+  String? about;
+  String? androidUrl;
+  String? iosUrl;
   AppDetail(
       {this.color,
       this.path,
@@ -35,7 +35,7 @@ class _AppDetailState extends State<AppDetail> {
   Widget heading(BuildContext context) {
     return Container(
       height: Dimension.fullHeight(context) * 0.22,
-      decoration: BoxDecoration(color: Color(widget.color)),
+      decoration: BoxDecoration(color: Color(widget.color!)),
       padding: EdgeInsets.all(12.0),
       child: Row(
         children: [
@@ -44,13 +44,13 @@ class _AppDetailState extends State<AppDetail> {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
                 child: Image.network(
-                  widget.path,
+                  widget.path!,
                 )),
           ),
           Dimension.spaceWidth(12.0),
           Container(
             child: Text(
-              widget.title,
+              widget.title!,
               style: appTitle,
             ),
           )
@@ -70,7 +70,7 @@ class _AppDetailState extends State<AppDetail> {
       child: Column(
         children: [
           Text(
-            widget.about,
+            widget.about!,
             textAlign: TextAlign.justify,
           ),
         ],

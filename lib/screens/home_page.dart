@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget item(BuildContext context,
-      {String title, IconData icon, VoidCallback onPressed}) {
+      {required String title, IconData? icon, VoidCallback? onPressed}) {
     return InkWell(
       onTap: onPressed,
       child: Container(

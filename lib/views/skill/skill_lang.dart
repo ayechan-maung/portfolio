@@ -14,7 +14,7 @@ class SkillLanguage {
   StreamController<List<KnowledgeLang>> knowController = StreamController<List<KnowledgeLang>>.broadcast();
   Stream<List<KnowledgeLang>> get knowStream => knowController.stream;
 
-  Future<List<SkillModel>> getSkill({String col}) async {
+  Future<List<SkillModel>> getSkill({required String col}) async {
     final getData = await fireStore.collection(col).get();
     final docs = getData.docs;
     if (docs.length > 0) {

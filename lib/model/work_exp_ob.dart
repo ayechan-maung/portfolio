@@ -1,9 +1,9 @@
 class WorkExp {
-  String title;
-  String role;
-  String year;
-  String image;
-  bool isExpand;
+  String? title;
+  String? role;
+  String? year;
+  String? image;
+  bool? isExpand;
   WorkExp({this.title, this.year, this.image, this.role, this.isExpand});
 
   factory WorkExp.fromJson(Map<String, dynamic> json) => WorkExp(

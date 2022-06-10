@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:skeleton_loader/skeleton_loader.dart';
 
 class SkeletonLoading extends StatelessWidget {
-  final int item;
-  final double radius;
+  final int? item;
+  final double? radius;
 
-  const SkeletonLoading({Key key, this.item, this.radius});
+  const SkeletonLoading({Key? key, this.item, this.radius});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SkeletonLoader(
-        items: item,
+        items: item!,
         builder: Container(
           child: Row(
             children: [

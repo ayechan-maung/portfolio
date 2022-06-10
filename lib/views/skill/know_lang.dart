@@ -1,8 +1,8 @@
 class KnowledgeLang {
-  String name;
-  String level;
-  String icon;
-  int skill;
+  String? name;
+  String? level;
+  String? icon;
+  int? skill;
   KnowledgeLang({this.icon, this.level, this.name, this.skill});
 
   factory KnowledgeLang.fromJson(Map<String, dynamic> json) => KnowledgeLang(

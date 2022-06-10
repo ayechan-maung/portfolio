@@ -8,6 +8,8 @@ import 'package:portfolio/consts/txt_sty.dart';
 import 'package:portfolio/views/my_location.dart';
 import 'dart:async';
 
+import '../test_screen.dart';
+
 class About extends StatelessWidget {
   StreamController<String> controllerUrl = StreamController<String>();
 
@@ -38,35 +40,39 @@ class About extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                print('is work?');
-                BranchLinkProperties lp = BranchLinkProperties(
-                    channel: 'facebook',
-                    feature: 'sharing',
-                    //alias: 'flutterplugin' //define link url,
-                    alias: 'spo-4',
-                    stage: 'new share',
-                    campaign: 'xxxxx',
-                    tags: ['one', 'two', 'three']);
-                lp.addControlParam('\$uri_redirect_mode', '1');
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return ThuDynamicLink();
+                }));
+                // print('is work?');
+                // BranchLinkProperties lp = BranchLinkProperties(
+                //     channel: 'facebook',
+                //     feature: 'sharing',
+                //     //alias: 'flutterplugin' //define link url,
+                //     alias: 'spo-4',
+                //     stage: 'new share',
+                //     campaign: 'xxxxx',
+                //     tags: ['one', 'two', 'three']);
+                // lp.addControlParam('\$uri_redirect_mode', '1');
 
-                return generateLink(
-                    BranchUniversalObject(
-                        canonicalIdentifier: 'flutter/branch',
-                        //canonicalUrl: '',
-                        title: 'Flutter Branch Plugin',
-                        imageUrl:
-                            'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
-                        contentDescription: 'Flutter Branch Description',
-                        contentMetadata: BranchContentMetaData()
-                          ..addCustomMetadata('number', '4')
-                          ..addCustomMetadata('order_number', 'SPO-4'),
-                        keywords: ['Plugin', 'Branch', 'Flutter'],
-                        publiclyIndex: true,
-                        locallyIndex: true,
-                        expirationDateInMilliSec: DateTime.now()
-                            .add(Duration(days: 365))
-                            .millisecondsSinceEpoch),
-                    lp);
+                // return generateLink(
+                //     BranchUniversalObject(
+                //         canonicalIdentifier: 'flutter/branch',
+                //         //canonicalUrl: '',
+                //         title: 'Flutter Branch Plugin',
+                //         imageUrl:
+                //             'https://flutter.dev/assets/flutter-lockup-4cb0ee072ab312e59784d9fbf4fb7ad42688a7fdaea1270ccf6bbf4f34b7e03f.svg',
+                //         contentDescription: 'Flutter Branch Description',
+                //         contentMetadata: BranchContentMetaData()
+                //           ..addCustomMetadata('number', '4')
+                //           ..addCustomMetadata('order_number', 'SPO-4'),
+                //         keywords: ['Plugin', 'Branch', 'Flutter'],
+                //         publiclyIndex: true,
+                //         locallyIndex: true,
+                //         expirationDateInMilliSec: DateTime.now()
+                //             .add(Duration(days: 365))
+                //             .millisecondsSinceEpoch),
+                //     lp);
               },
               icon: Icon(Icons.ten_k))
         ],

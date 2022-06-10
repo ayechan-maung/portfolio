@@ -19,12 +19,12 @@ class Experience extends StatefulWidget {
 
 class _ExperienceState extends State<Experience> {
   final fireStore = FirebaseFirestore.instance;
-  List<bool> _isOpen;
+  List<bool>? _isOpen;
 
   FirebaseNetwork fireNetwork = FirebaseNetwork();
   WorkExpBase workExp = WorkExpBase();
 
-  List<WorkExp> expData = [];
+  List<WorkExp>? expData = [];
 
   Future<void> fetchLocalData() async {
     final result = await LocalDb.getData('work_exp');
@@ -105,7 +105,7 @@ class _ExperienceState extends State<Experience> {
                                   if (snapshot.hasData) {
                                     expData = snapshot.data;
                                     final List expList =
-                                        Iterable.generate(expData.length)
+                                        Iterable.generate(expData!.length)
                                             .toList();
                                     return expList.length > 0
                                         ? AnimationLimiter(
@@ -122,10 +122,10 @@ class _ExperienceState extends State<Experience> {
                                                     delay: Duration(
                                                         milliseconds: 300),
                                                     child: _workExp(
-                                                        img: expData[e].image,
-                                                        title: expData[e].title,
-                                                        role: expData[e].role,
-                                                        year: expData[e].year),
+                                                        img: expData![e].image!,
+                                                        title: expData![e].title!,
+                                                        role: expData![e].role!,
+                                                        year: expData![e].year!),
                                                   ),
                                                 );
                                               }).toList(),
@@ -223,7 +223,7 @@ class _ExperienceState extends State<Experience> {
     );
   }
 
-  Widget _workExp({String img, String title, String year, String role}) {
+  Widget _workExp({required String img, required String title, required String year, required String role}) {
     return Container(
       margin: EdgeInsets.only(bottom: 8.0),
       decoration: BoxDecoration(
@@ -319,7 +319,7 @@ class _ExperienceState extends State<Experience> {
           stream: fireNetwork.expStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<ProjectExp> projects = snapshot.data;
+              List<ProjectExp> projects = snapshot.data!;
               final List proList = Iterable.generate(projects.length).toList();
               return Expanded(
                 child: SingleChildScrollView(
@@ -328,7 +328,7 @@ class _ExperienceState extends State<Experience> {
                     animationDuration: Duration(milliseconds: 800),
                     expansionCallback: (int i, bool isExpand) {
                       setState(() {
-                        projects[i].isExpand = !projects[i].isExpand;
+                        projects[i].isExpand = !projects[i].isExpand!;
                       });
                     },
                     children: projects
@@ -337,9 +337,9 @@ class _ExperienceState extends State<Experience> {
                             canTapOnHeader: true,
                             headerBuilder:
                                 (BuildContext context, bool isExpand) {
-                              return _expProject(e.logo, e.desc, e.title);
+                              return _expProject(e.logo!, e.desc!, e.title!);
                             },
-                            isExpanded: e.isExpand,
+                            isExpanded: e.isExpand!,
                             body: Container(
                               padding: EdgeInsets.only(
                                   right: 8.0, left: 8.0, bottom: 8.0),
@@ -394,7 +394,7 @@ class _ExperienceState extends State<Experience> {
                                     ],
                                   ),
                                   Text(
-                                    e.about,
+                                    e.about!,
                                     textAlign: TextAlign.justify,
                                   ),
                                 ],
