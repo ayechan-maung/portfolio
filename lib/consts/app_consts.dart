@@ -1,14 +1,3 @@
-
-import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-// import 'package:flutter_app_badger/flutter_app_badger.dart';
-// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:path/path.dart';
-
 class OneSignalUtils {
   final oneSignalId = '4414fa14-ebb5-449e-ae6c-a97ca1081bf0';
 
@@ -35,26 +24,26 @@ class OneSignalUtils {
     // }
   }
 
-  Future initOneSignal(BuildContext context) async {
-    var instance = OneSignal.shared;
-    OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
-
-    await OneSignal.shared.setAppId('5b76e2c9-2950-4f89-ae17-34733cb0c2b7');
-    await instance.setRequiresUserPrivacyConsent(true);
-    await OneSignal.shared.consentGranted(true);
-    await OneSignal.shared
-        .promptUserForPushNotificationPermission(fallbackToSettings: true);
-    // OneSignal.shared.setNotificationOpenedHandler(_onOpenedNotification);
-    OneSignal.shared
-        .promptUserForPushNotificationPermission(fallbackToSettings: true);
-    OneSignal.shared
-        .setSubscriptionObserver((OSSubscriptionStateChanges handler) {
-      print("Onesignal USER_ID in observer ${handler.to.userId}");
-    });
-    OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {});
-    // var status = await OneSignal.shared.getPermissionSubscriptionState();
-    // String oneSignalId = status.subscriptionStatus.userId;
-  }
+  // Future initOneSignal(BuildContext context) async {
+  //   var instance = OneSignal.shared;
+  //   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+  //
+  //   await OneSignal.shared.setAppId('5b76e2c9-2950-4f89-ae17-34733cb0c2b7');
+  //   await instance.setRequiresUserPrivacyConsent(true);
+  //   await OneSignal.shared.consentGranted(true);
+  //   await OneSignal.shared
+  //       .promptUserForPushNotificationPermission(fallbackToSettings: true);
+  //   // OneSignal.shared.setNotificationOpenedHandler(_onOpenedNotification);
+  //   OneSignal.shared
+  //       .promptUserForPushNotificationPermission(fallbackToSettings: true);
+  //   OneSignal.shared
+  //       .setSubscriptionObserver((OSSubscriptionStateChanges handler) {
+  //     print("Onesignal USER_ID in observer ${handler.to.userId}");
+  //   });
+  //   OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {});
+  //   // var status = await OneSignal.shared.getPermissionSubscriptionState();
+  //   // String oneSignalId = status.subscriptionStatus.userId;
+  // }
 
   // void _onGettingNotification(
   //     OSNotification notification, BuildContext context) async {

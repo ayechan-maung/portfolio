@@ -21,23 +21,21 @@ dependencies:
 
   get:
   url_launcher:
-  cloud_firestore: ^2.0.0
+  cloud_firestore: ^3.1.17
   firebase_core: ^1.1.0
   rxdart: ^0.27.0
-  getwidget: ^2.0.2
+  getwidget: ^3.0.1
   fluttertoast: ^8.0.6
   sqflite: ^2.0.0+3
   path: ^1.8.0
   dio: ^4.0.0
-  skeleton_loader: ^1.0.2+3
-  percent_indicator: ^2.1.7+2
+  skeleton_loader: ^2.0.0+4
+  percent_indicator: ^4.2.2
   animated_text_kit: ^4.2.1
   animations: ^2.0.0
-  font_awesome_flutter: ^9.0.0
+  font_awesome_flutter: ^10.1.0
   auto_animated: ^3.0.0
   flutter_staggered_animations: ^1.0.0
-  onesignal_flutter: ^3.2.3
-  flutter_branch_sdk: ^3.4.0
 
 dev_dependencies:
   flutter_test:
