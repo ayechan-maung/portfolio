@@ -45,8 +45,7 @@ class _HomePageState extends State<HomePage> {
             AnimateIfVisible(
               key: Key('item.0'),
               duration: Duration(milliseconds: 900),
-              builder: (BuildContext context, Animation<double> animation) =>
-                  FadeTransition(
+              builder: (BuildContext context, Animation<double> animation) => FadeTransition(
                 opacity: Tween<double>(begin: 0, end: 1).animate(animation),
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 40.0),
@@ -62,13 +61,10 @@ class _HomePageState extends State<HomePage> {
               key: Key('item.1'),
               duration: Duration(milliseconds: 900),
               // delay: Duration(milliseconds: 200),
-              builder: (BuildContext context, Animation<double> animation) =>
-                  FadeTransition(
+              builder: (BuildContext context, Animation<double> animation) => FadeTransition(
                 opacity: Tween<double>(begin: 0, end: 1).animate(animation),
-                child: item(context,
-                    icon: FontAwesomeIcons.user, title: 'About', onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => About()));
+                child: item(context, icon: FontAwesomeIcons.user, title: 'About', onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => About()));
                 }),
               ),
             ),
@@ -76,12 +72,9 @@ class _HomePageState extends State<HomePage> {
               key: Key('item.2'),
               duration: Duration(milliseconds: 900),
               // delay: Duration(milliseconds: 200),
-              builder: (BuildContext context, Animation<double> animation) =>
-                  FadeTransition(
+              builder: (BuildContext context, Animation<double> animation) => FadeTransition(
                 opacity: Tween<double>(begin: 0, end: 1).animate(animation),
-                child: item(context,
-                    icon: FontAwesomeIcons.briefcase,
-                    title: 'Experience', onPressed: () {
+                child: item(context, icon: FontAwesomeIcons.briefcase, title: 'Experience', onPressed: () {
                   Get.to(() => Experience());
                 }),
               ),
@@ -90,12 +83,9 @@ class _HomePageState extends State<HomePage> {
               key: Key('item.3'),
               duration: Duration(milliseconds: 900),
               // delay: Duration(milliseconds: 200),
-              builder: (BuildContext context, Animation<double> animation) =>
-                  FadeTransition(
+              builder: (BuildContext context, Animation<double> animation) => FadeTransition(
                 opacity: Tween<double>(begin: 0, end: 1).animate(animation),
-                child: item(context,
-                    icon: FontAwesomeIcons.laptopCode,
-                    title: 'Edu & Skills', onPressed: () {
+                child: item(context, icon: FontAwesomeIcons.laptopCode, title: 'Edu & Skills', onPressed: () {
                   Get.to(() => Skills());
                 }),
               ),
@@ -106,8 +96,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget item(BuildContext context,
-      {String title, IconData icon, VoidCallback onPressed}) {
+  Widget item(BuildContext context, {required String title, IconData? icon, VoidCallback? onPressed}) {
     return InkWell(
       onTap: onPressed,
       child: Container(
@@ -124,7 +113,7 @@ class _HomePageState extends State<HomePage> {
               padding: EdgeInsets.all(18.0),
               child: FaIcon(
                 icon,
-                size: Dimension.fullWidth(context) * 0.23,
+                size: Dimension.fullWidth(context) * 0.1,
               ),
             ),
             Dimension.spaceWidth(14.0),
@@ -132,10 +121,7 @@ class _HomePageState extends State<HomePage> {
               width: Dimension.fullWidth(context) * 0.5,
               child: Text(
                 title,
-                style: TextStyle(
-                    fontSize: 28,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 28, fontStyle: FontStyle.italic, fontWeight: FontWeight.w600),
               ),
             ),
           ],

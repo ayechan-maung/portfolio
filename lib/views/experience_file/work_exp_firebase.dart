@@ -13,7 +13,7 @@ class WorkExpBase {
       StreamController<List<WorkExp>>.broadcast();
   Stream<List<WorkExp>> get expStream => workExpController.stream;
 
-  Future<List<WorkExp>> getFirebase({String col}) async {
+  Future<List<WorkExp>> getFirebase({required String col}) async {
     final result = await fireStore.collection(col).get();
     final docs = result.docs;
     // print("Docu Length*** ${docs.length}");

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/screens/splash_screen.dart';
@@ -13,11 +11,6 @@ class _PrePageState extends State<PrePage> {
   String oneSignalId = '5b76e2c9-2950-4f89-ae17-34733cb0c2b7';
 
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-
-  StreamSubscription<Map> streamSubscription;
-  StreamController<String> controllerData = StreamController<String>();
-  StreamController<String> controllerInitSession = StreamController<String>();
-  StreamController<String> controllerUrl = StreamController<String>();
 
   @override
   void initState() {
@@ -50,9 +43,5 @@ class _PrePageState extends State<PrePage> {
   @override
   void dispose() {
     super.dispose();
-    controllerData.close();
-    controllerUrl.close();
-    controllerInitSession.close();
-    streamSubscription?.cancel();
   }
 }

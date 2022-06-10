@@ -40,6 +40,29 @@
       });
     }
   </script>
+
+  <!-- Add this line -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-storage.js"></script>
   <script src="main.dart.js" type="application/javascript"></script>
+
+  <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyDdTG9LKMnQgCxqcLte98FHdKqb2k6Pkro",
+        authDomain: "portfolio-7c46f.firebaseapp.com",
+        databaseURL: "https://portfolio-7c46f.firebaseio.com",
+        projectId: "portfolio-7c46f",
+        storageBucket: "portfolio-7c46f.appspot.com",
+        messagingSenderId: "513140012494",
+        appId: "1:513140012494:web:6b807c85c7ff983a87679f",
+        measurementId: "G-KDWFKB2L8K",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+
 </body>
 </html>

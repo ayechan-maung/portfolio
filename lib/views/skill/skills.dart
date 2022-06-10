@@ -89,7 +89,7 @@ class _SkillsState extends State<Skills> {
                             stream: skillLanguage.skillStream,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-                                List<SkillModel> skillList = snapshot.data;
+                                List<SkillModel> skillList = snapshot.data!;
                                 final skills =
                                     Iterable.generate(skillList.length)
                                         .toList();
@@ -105,7 +105,7 @@ class _SkillsState extends State<Skills> {
                                                   Duration(milliseconds: 900),
                                               child: FadeInAnimation(
                                                 child: skillItem(
-                                                    icon: skillList[e].icon,
+                                                    icon: skillList[e].icon!,
                                                     name: skillList[e].name,
                                                     level: skillList[e].level,
                                                     skill: skillList[e].skills),
@@ -138,7 +138,7 @@ class _SkillsState extends State<Skills> {
                             stream: skillLanguage.knowStream,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-                                List<KnowledgeLang> skillList = snapshot.data;
+                                List<KnowledgeLang> skillList = snapshot.data!;
                                 final skills =
                                     Iterable.generate(skillList.length)
                                         .toList();
@@ -153,7 +153,7 @@ class _SkillsState extends State<Skills> {
                                                     Duration(milliseconds: 900),
                                                 child: FadeInAnimation(
                                                   child: knowItem(
-                                                      icon: skillList[e].icon,
+                                                      icon: skillList[e].icon!,
                                                       name: skillList[e].name,
                                                       skill:
                                                           skillList[e].skill),
@@ -181,7 +181,7 @@ class _SkillsState extends State<Skills> {
     );
   }
 
-  Widget skillItem({String icon, name, level, int skill}) {
+  Widget skillItem({required String icon, required name, required level, int? skill}) {
     return Container(
       margin: EdgeInsets.only(bottom: 8.0),
       decoration: BoxDecoration(
@@ -221,7 +221,7 @@ class _SkillsState extends State<Skills> {
               animation: true,
               // animationDuration: 20,
               // fillColor: Colors.blue[800],
-              backgroundColor: Colors.grey[300],
+              backgroundColor: Colors.grey[300]!,
               lineWidth: 2,
               progressColor: Colors.blue[800],
               center: Text(
@@ -236,7 +236,7 @@ class _SkillsState extends State<Skills> {
     );
   }
 
-  Widget knowItem({String icon, name, int skill}) {
+  Widget knowItem({required String icon, required name, int? skill}) {
     return Container(
       // height: 130,
       margin: EdgeInsets.only(bottom: 8.0),
@@ -284,7 +284,7 @@ class _SkillsState extends State<Skills> {
     );
   }
 
-  Widget eduWidget({String name, year, school}) {
+  Widget eduWidget({required String name, required year, required school}) {
     return Container(
       padding: EdgeInsets.all(8.0),
       margin: EdgeInsets.all(8.0),

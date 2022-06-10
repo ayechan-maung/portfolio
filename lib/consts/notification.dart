@@ -2,9 +2,9 @@ class OneSignalSet {
   final oneSignalId = '4414fa14-ebb5-449e-ae6c-a97ca1081bf0';
   bool _requireConsent = true;
   String _debugLabelString = "";
-  String _emailAddress;
-  String _smsNumber;
-  String _externalUserId;
+  String? _emailAddress;
+  String? _smsNumber;
+  String? _externalUserId;
   bool _enableConsentButton = false;
 
   // Future<void> initPlatformState() async {

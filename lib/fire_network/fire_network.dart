@@ -11,7 +11,7 @@ class FirebaseNetwork {
       StreamController<List<ProjectExp>>.broadcast();
   Stream<List<ProjectExp>> get expStream => expController.stream;
 
-  Future<List<ProjectExp>> getFirebase({String col}) async {
+  Future<List<ProjectExp>> getFirebase({required String col}) async {
     final result = await fireStore.collection(col).get();
     final docs = result.docs;
     // print("Docu Length*** ${docs.length}");

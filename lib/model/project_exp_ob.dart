@@ -1,12 +1,12 @@
 class ProjectExp {
-  String title;
-  String logo;
-  String about;
+  String? title;
+  String? logo;
+  String? about;
   var color;
-  String desc;
-  bool isExpand;
-  String androidUrl;
-  String iosUrl;
+  String? desc;
+  bool? isExpand;
+  String? androidUrl;
+  String? iosUrl;
   ProjectExp(
       {this.title,
       this.color,

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:portfolio/consts/dimension.dart';
 import 'package:portfolio/consts/launch_url.dart';
 import 'package:portfolio/consts/txt_sty.dart';
+import 'package:portfolio/views/about/my_self.dart';
 import 'package:portfolio/views/my_location.dart';
 
 class About extends StatelessWidget {
@@ -24,13 +25,14 @@ class About extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        margin: EdgeInsets.all(8.0),
-        child: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [_profile(context), _personal(context), _aboutTxt(context)],
-        ),
-      ),
+      body: MySelf(),
+      // body: Container(
+      //   margin: EdgeInsets.all(8.0),
+      //   child: ListView(
+      //     // crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: [_profile(context), _personal(context), _aboutTxt(context)],
+      //   ),
+      // ),
     );
   }
 
@@ -62,6 +64,7 @@ class About extends StatelessWidget {
                 Container(
                     height: 40,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           width: 15,
@@ -69,7 +72,7 @@ class About extends StatelessWidget {
                           // color: Colors.blue.withOpacity(0.2),
                         ),
                         Container(
-                          width: Dimension.fullWidth(context) * 0.18,
+                          width: Dimension.fullWidth(context) / 6,
                           child: AnimatedTextKit(
                             isRepeatingAnimation: true,
                             repeatForever: true,
